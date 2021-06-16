@@ -1,0 +1,39 @@
+# docker-compose -f curso/instalaciones/weblogic.yaml ORDEN
+# ORDEN:
+#   up:     Crear los contenedors o Modificarlos si es que ha habido cambios o no existen.
+#           Además los arranca
+#           Muestra en la consola los logs de los contenedores (evitable si añadimos la opción -d)
+#   down:   Parar los contenedores (si están arrancados) y borrarlos
+#   stop:   Para los contenedores
+
+
+version: "3.0"
+
+services:
+    
+    weblogic:
+        image: store/oracle/weblogic:12.2.1.4-dev-200117    # Esto es un comentario
+        container_name: miweblogic
+        ports:
+            - 7001:7001
+            - 9002:9002
+        volumes:
+            - /home/ubuntu/environment/curso/instalaciones:/u01/oracle/properties
+        environment:
+            DOMAIN_NAME: base_domain
+            
+    mariadb:
+        image: mariadb
+        container_name: miMariaDB
+        ports:
+               # Puerto en el que montamos el NAT. En el que exponemos publicamente el servicio
+            - 3307:3306 
+                    # Puerto en el contenedor
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: miTestDB
+            MYSQL_USER: usuario
+            MYSQL_PASSWORD: password 
+
+# https://  IP   :9002/console    (usuario: admin, password: password1)
+# IP = curl ifconfig.me
