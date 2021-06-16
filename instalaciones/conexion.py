@@ -8,6 +8,25 @@ def solicitar_dato (dato, valor_por_defecto, valor_actual):
                                                         # valor por defecto
 def super_connect( usuario="" , password="" , server_ip="localhost",  port="7001" , protocolo="t3" ):
     
+    ## Revisar si se han puesto datos en la llamada al script
+    for indice in range(1,len(sys.argv)):
+        
+        if sys.argv[indice] == "--password" or sys.argv[indice] == "-p":
+            password=sys.argv[indice+1]  # Tomo como password el valor del siguiente argumento
+    
+        elif sys.argv[indice] == "--user" or sys.argv[indice] == "-u":
+            usuario=sys.argv[indice+1]  # Tomo como password el valor del siguiente argumento
+    
+        elif sys.argv[indice] == "--server" or sys.argv[indice] == "-s":
+            server_ip=sys.argv[indice+1]  # Tomo como password el valor del siguiente argumento
+    
+        elif sys.argv[indice] == "--port" or sys.argv[indice] == "-P":
+            port=sys.argv[indice+1]  # Tomo como password el valor del siguiente argumento
+    
+        elif sys.argv[indice] == "--protocol" or sys.argv[indice] == "-t":
+            protocolo=sys.argv[indice+1]  # Tomo como password el valor del siguiente argumento
+    
+    
     while True: 
         # Verificar si me han suministrado una contraseña
         # Si no, voy a solicitarla
@@ -36,8 +55,9 @@ def super_connect( usuario="" , password="" , server_ip="localhost",  port="7001
 ## Aqui acaba la funcion super_connect    
     
 #super_connect( usuario="admin" , password="password1" )
-super_connect( usuario="admin" ) # Se solicitaría contarseña por pantalla
+#super_connect( usuario="admin" ) # Se solicitaría contarseña por pantalla
 #super_connect( usuario="admin" , server_ip="" ) # Se solicitaría contarseña por pantalla y además servidor
                                                 # Si no me dan un servidor por pantalla... se toma localhost
 
 # Aqui hariamos muchas cosas !!!
+super_connect()
